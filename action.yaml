@@ -83,6 +83,13 @@ runs:
         echo "::set-output name=binary::$base64_binary"
       shell: bash
 
+    - name: Log Pull Request Details
+      if: inputs.action_type == 'graphql'
+      run: |
+        echo "Pull Request Title: ${{ github.event.pull_request.title }}"
+        echo "Pull Request Number: #${{ github.event.pull_request.number }}"
+      shell: bash
+
     - name: Send Binary and PR Details to GraphQL API
       if: inputs.action_type == 'graphql'
       id: send-graphql
