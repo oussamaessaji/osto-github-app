@@ -74,15 +74,6 @@ runs:
         INPUT_ASSET_TYPE: ${{ inputs.asset_type }}
         INPUT_TARGET: ${{ inputs.target }}
 
-    - name: Read Application Binary
-      if: inputs.action_type == 'graphql'
-      id: read-binary
-      run: |
-        echo "Reading application binary from path: $INPUT_TARGET"
-        base64_binary=$(base64 "$INPUT_TARGET" | tr -d '\n')
-        echo "::set-output name=binary::$base64_binary"
-      shell: bash
-
     - name: Log Pull Request Details
       if: inputs.action_type == 'graphql'
       run: |
